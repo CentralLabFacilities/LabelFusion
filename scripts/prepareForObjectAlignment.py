@@ -36,7 +36,7 @@ lcmlog_filename = dataMap["lcmlog"]
 # call ElasticFusion
 cameraConfig_arg = ""
 if os.path.isfile("camera.cfg"):
-    cameraConfig_arg += " -cal camera.cfg"
+    cameraConfig_arg += " -cam camera.cfg"
 os.system(path_to_ElasticFusion_executable + " -l ./" + lcmlog_filename + cameraConfig_arg)
 
 # rename posegraph
