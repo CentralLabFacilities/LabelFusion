@@ -43,7 +43,7 @@ class RenderTrainingImages(object):
 
         view = self.view
         self.setResolution(view)
-        setCameraInstrinsicsAsus(view)
+        setCameraIntrinsics(view, 648, 367, 899)
         # cameraToWorld = utils.getDefaultCameraToWorld()
         # setCameraTransform(view.camera(), cameraToWorld)
         setCameraTransform(view.camera(), vtk.vtkTransform())
