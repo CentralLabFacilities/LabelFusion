@@ -56,8 +56,8 @@ class RenderTrainingImages(object):
             params = cfg.readline().split(" ")
             assert len(params)==6, "camera.cfg should define exactly six params: w h fx fy cx cy"
 
-            w = params[0]
-            h = params[1]
+            w = int(params[0])
+            h = int(params[1])
         else:
             w = 1280
             h = 720
@@ -317,9 +317,9 @@ def setCameraIntrinsics(view, principalX, principalY, focalLength):
         params = cfg.readline().split(" ")
         assert len(params)==6, "camera.cfg should define exactly six params: w h fx fy cx cy"
 
-        focalLength = params[2]
-        principalX = params[4]
-        principalY = params[5]
+        focalLength = float(params[2])
+        principalX = float(params[4])
+        principalY = float(params[5])
 
     imageWidth = view.width
     imageHeight = view.height
