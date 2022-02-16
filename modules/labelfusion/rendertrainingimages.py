@@ -42,7 +42,7 @@ class RenderTrainingImages(object):
         om.findObjectByName('grid').setProperty('Visible', False)
 
         view = self.view
-        view.setFixedSize(640, 480)
+        self.setResolution(view)
         setCameraInstrinsicsAsus(view)
         # cameraToWorld = utils.getDefaultCameraToWorld()
         # setCameraTransform(view.camera(), cameraToWorld)
@@ -50,6 +50,19 @@ class RenderTrainingImages(object):
         view.forceRender()
         self.enableLighting()
 
+    def setResolution(self, view):
+        if os.path.isfile("camera.cfg"):
+            cfg = open("camera.cfg", "r")
+            params = cfg.readline().split(" ")
+            assert len(params)==6, "camera.cfg should define exactly six params: w h fx fy cx cy"
+
+            w = params[0]
+            h = params[1]
+        else:
+            w = 1280
+            h = 720
+        
+        view.setFixedSize(w, h)
 
     def disableLighting(self):
         view = self.view
@@ -298,6 +311,15 @@ def viewAngleToFocalLength(viewAngle, imageHeight):
 
 def setCameraIntrinsics(view, principalX, principalY, focalLength):
     '''Note, call this function after setting the view dimensions'''
+
+    if os.path.isfile("camera.cfg"):
+        cfg = open("camera.cfg", "r")
+        params = cfg.readline().split(" ")
+        assert len(params)==6, "camera.cfg should define exactly six params: w h fx fy cx cy"
+
+        focalLength = params[2]
+        principalX = params[4]
+        principalY = params[5]
 
     imageWidth = view.width
     imageHeight = view.height
